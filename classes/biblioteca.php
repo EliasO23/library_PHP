@@ -34,9 +34,10 @@ class Biblioteca
                 $libro->setTitulo($titulo);
                 $libro->setAutor($autor);
                 $libro->setCategoria($categoria);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     public function eliminarLibro($id)

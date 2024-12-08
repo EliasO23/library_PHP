@@ -27,6 +27,7 @@ if (isset($_POST['createForm'])) {
 
         $libro = new Libro($id, $titulo, $autor, $categoria);
         $biblioteca->agregarLibro($libro);
+        
 
         $_SESSION['biblioteca'] = $biblioteca;
         header('Location: /FSJ24B/TareasSemanas/biblioteca/home.php');

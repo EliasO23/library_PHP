@@ -32,9 +32,6 @@ if (isset($_GET['delete'])){
 </head>
 <body>
     <?php include './shared/navbar.php'; ?>
-    <!-- <form method="POST">
-        <button class="btn" type="submit" name="generar_libros">Generar Libros</button>
-    </form> -->
 
     <main class="margin">
         <section class="inicio">
@@ -66,7 +63,7 @@ if (isset($_GET['delete'])){
                                     <td><?= $libro->isDisponible() ? "Disponible" : "No disponible"; ?></td>
                                     <td>
                                         <a class="btn-edit" href="editarLibro.php?edit=<?= $libro->getIdLibro(); ?>">Editar</a>
-                                        <a class="btn-delete" href="?delete=<?= $libro->getIdLibro(); ?>">Eliminar</a>
+                                        <a class="btn-delete" href="?delete=<?= $libro->getIdLibro(); ?>" onclick="return confirmDelete()">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -85,6 +82,17 @@ if (isset($_GET['delete'])){
 
     </main>
     
+    <script>
+        function confirmDelete() {
+            var result = confirm("¿Estás seguro de que quieres eliminar este libro?");
+            if (result) {
+                return true; // Si el usuario confirma, se procede con la eliminación.
+            } else {
+                return false; // Si el usuario cancela, no se ejecuta la eliminación.
+            }
+        }
+    </script>
+
 </body>
 </html>
 

@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
     $regresar = $biblioteca->devolverLibro($id);
-
+    
     $_SESSION['biblioteca'] = $biblioteca;
     header('Location: /FSJ24B/TareasSemanas/biblioteca/regresarLibro.php');
 }
@@ -82,7 +82,7 @@ if (isset($_GET['id'])) {
         </section>
 
         <section class="final">
-            <a class="btn"href="./index.php">Regresar</a>
+            <a class="btn"href="./home.php">Verificar</a>
         </section>
     </main>
 

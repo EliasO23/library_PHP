@@ -16,10 +16,16 @@ if (isset($_POST['updateForm'])){
     $autor = $_POST['autor'];
     $categoria = $_POST['categoria'];
 
-    $biblioteca->actualizarLibro($id, $titulo, $autor, $categoria);
+    $actualizacion = $biblioteca->actualizarLibro($id, $titulo, $autor, $categoria);
+
+    if ($actualizacion) {
+        $mensaje = "El libro ha sido actualizado exitosamente.";
+    } else {
+        $mensaje = "No se pudo actualizar el libro.";
+    }
 
     $_SESSION['biblioteca'] = $biblioteca;
-    header('Location: /FSJ24B/TareasSemanas/biblioteca/home.php');
+    // header('Location: /FSJ24B/TareasSemanas/biblioteca/home.php');
 
 }
 
@@ -71,6 +77,16 @@ if (isset($_POST['updateForm'])){
         </form>
 
         <?php }?>
+
+        <!-- Mostrar mensaje -->
+        <?php if ($mensaje) {
+            echo "
+            <script>
+                alert('$mensaje');
+                window.location.href = 'home.php';
+            </script>
+            ";
+        } ?>
     </main>
     
 </body>
