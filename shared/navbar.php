@@ -1,7 +1,7 @@
 <nav class="navbar">
     <section class="navbar-container">
         <!-- Logo -->
-        <a href="./index.php" class="logo">Librery K.</a>
+        <a href="./index.php" class="logo">Bibliotech</a>
 
         <!-- Enlaces de navegación -->
         <ul class="navbar-links">

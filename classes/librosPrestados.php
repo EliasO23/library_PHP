@@ -29,16 +29,40 @@ class LibrosPrestados extends Libro {
     }
 
     // Setters
-    public function setFechaPrestamo($fechaPrestamo) {
-        $this->fechaPrestamo = $fechaPrestamo;
-    }
-
     public function setFechaDevolucion($fechaDevolucion) {
         $this->fechaDevolucion = $fechaDevolucion;
     }
 
     public function setEstudiante($estudiante) {
         $this->estudiante = $estudiante;
+    }
+
+    // Metodos
+    public static function prestarLibro($libro, $fechaPrestamo, $fechaDevolucion, $estudiante) {
+        if ($libro->isDisponible()) {
+            $libro->setDisponible(false);
+            return new self(
+                $libro->getIdLibro(),
+                $libro->getTitulo(),
+                $libro->getAutor(),
+                $libro->getCategoria(),
+                $fechaPrestamo,
+                $fechaDevolucion,
+                $estudiante
+            );
+        }
+        return null;
+    }
+
+    public static function devolverLibro($libro, $librosPrestados, $idLibro) {
+        foreach ($librosPrestados as $key => $libroPrestado) {
+            if ($libroPrestado->getIdLibro() == $idLibro) {
+                $libro->setDisponible(true);
+                unset($librosPrestados[$key]);
+                return $librosPrestados;
+            }
+        }
+        return $librosPrestados;
     }
 }
 ?>

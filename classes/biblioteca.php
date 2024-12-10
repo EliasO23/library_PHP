@@ -71,43 +71,26 @@ class Biblioteca
         return $libros;
     }
 
-    public function prestarLibro($id, $fechaPrestamo, $fechaDevolucion, $estudiante)
-    {
+    public function prestarLibro($id, $fechaPrestamo, $fechaDevolucion, $estudiante) {
         $libro = $this->buscarLibro($id);
-        if ($libro->getIdLibro() == $id && $libro->isDisponible()) {
-            $libroPrestado = new LibrosPrestados(
-                $libro->getIdLibro(),
-                $libro->getTitulo(),
-                $libro->getAutor(),
-                $libro->getCategoria(),
-                $fechaPrestamo,
-                $fechaDevolucion,
-                $estudiante
-            );
-            $this->librosPrestados[] = $libroPrestado;
-            $libro->setDisponible(false);
-            return true;
-        }
-
-        return false;
-    }
-
-    public function devolverLibro($id)
-    {
-        foreach ($this->librosPrestados as $key => $libroPrestado){
-            if ($libroPrestado->getIdLibro() == $id){
-                foreach ($this->libros as $libro) {
-                    if ($libro->getIdLibro() == $id && !$libro->isDisponible()) {
-                        $libro->setDisponible(true);
-                        break;
-                    }
-                }
-
-                unset($this->librosPrestados[$key]);
+        if ($libro) {
+            $libroPrestado = LibrosPrestados::prestarLibro($libro, $fechaPrestamo, $fechaDevolucion, $estudiante);
+            if ($libroPrestado) {
+                $this->librosPrestados[] = $libroPrestado;
                 return true;
             }
         }
-        return false;
+        return false; 
+    }
+
+    public function devolverLibro($id) {
+        $libro = $this->buscarLibro($id);
+        
+        if ($libro) {
+            $this->librosPrestados = LibrosPrestados::devolverLibro($libro, $this->librosPrestados, $id); 
+            return true;
+        }
+        return false; 
     }
 
     public function getLibrosPrestados(){

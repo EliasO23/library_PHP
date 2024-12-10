@@ -15,7 +15,7 @@
 
     <main>
         <section class="info-container">
-            <h1 class="animated-title">Bienvenido a la Biblioteca</h1>
+            <h1 class="animated-title">Bienvenido a Bibliotech</h1>
             <h3 class="animated-subtitle">Un lugar ideal para aprender, investigar y disfrutar de la lectura.</h3>
             <p>Ofreciendo acceso a una amplia variedad de libros y materiales de lectura, además de servicios como préstamo, devolución, búsqueda personalizada y espacios para el estudio.</p>
             <section class="center">
